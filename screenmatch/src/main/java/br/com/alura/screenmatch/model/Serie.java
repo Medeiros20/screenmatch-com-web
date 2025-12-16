@@ -68,12 +68,12 @@ public class Serie {
         this.titulo = titulo;
     }
 
-    public Integer getTotaltemporadas() {
+    public Integer getTotalTemporadas() {
         return totaltemporadas;
     }
 
-    public void setTotaltemporadas(Integer totaltemporadas) {
-        this.totaltemporadas = totaltemporadas;
+    public void setTotalTemporadas(Integer totalTemporadas) {
+        this.totaltemporadas = totalTemporadas;
     }
 
     public Double getAvaliacao() {
