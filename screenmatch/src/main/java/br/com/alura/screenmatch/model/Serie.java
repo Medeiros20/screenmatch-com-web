@@ -1,7 +1,6 @@
 package br.com.alura.screenmatch.model;
 
 import br.com.alura.screenmatch.service.ConsultaChatGPT;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -14,14 +13,11 @@ public class Serie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(updatable = true)
     private String titulo;
     private Integer totaltemporadas;
     private Double avaliacao;
-
     @Enumerated(EnumType.STRING)
-    private  Categoria genero;
+    private Categoria genero;
     private String atores;
     private String poster;
     private String sinopse;
@@ -29,17 +25,15 @@ public class Serie {
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Episodio> episodios = new ArrayList<>();
 
-    public Serie(){}
+    public Serie() {}
 
     public Serie(DadosSerie dadosSerie){
         this.titulo = dadosSerie.titulo();
         this.totaltemporadas = dadosSerie.totaltemporadas();
-        this.avaliacao = OptionalDouble.of(Double.valueOf(dadosSerie.avaliacao())).orElse(0.0);
+        this.avaliacao = OptionalDouble.of(Double.valueOf(dadosSerie.avaliacao())).orElse(0);
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
         this.atores = dadosSerie.atores();
         this.poster = dadosSerie.poster();
-        //this.sinopse = dadosSerie.sinopse();
-        //LINHA ABAIXO SERA UTILIZADA QUANDO UTILIZAR UMA API DE IA PARA TRADUÇÃO DE TEXTO
         this.sinopse = ConsultaChatGPT.obterTraducao(dadosSerie.sinopse()).trim();
     }
 
@@ -118,13 +112,14 @@ public class Serie {
 
     @Override
     public String toString() {
-        return  "genero = " + genero +
-                ", titulo = '" + titulo + '\'' +
-                ", totaltemporadas = " + totaltemporadas +
-                ", avaliacao = " + avaliacao +
-                ", atores = '" + atores + '\'' +
-                ", poster = '" + poster + '\'' +
-                ", sinopse = '" + sinopse + '\'' +
-                ", Episodios: " + episodios+ '\'';
+        return
+                "genero=" + genero +
+                        ", titulo='" + titulo + '\'' +
+                        ", totalTemporadas=" + totaltemporadas +
+                        ", avaliacao=" + avaliacao +
+                        ", atores='" + atores + '\'' +
+                        ", poster='" + poster + '\'' +
+                        ", sinopse='" + sinopse + '\'' +
+                        ", episodios='" + episodios + '\'';
     }
 }
