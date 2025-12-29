@@ -29,10 +29,10 @@
 
 ```bash
 # Clone o repositório
-git clone https://github.com/Medeiros20/screenmatch-sem-web.git
+git clone https://github.com/Medeiros20/screenmatch-com-web.git
 
 # Acesse a pasta do projeto
-cd screenmatch-sem-web
+cd screenmatch-com-web
 
 # Execute o projeto (exemplo)
 java -jar screenmatch.jar
